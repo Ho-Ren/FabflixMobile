@@ -76,7 +76,7 @@ public class RedActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void connectToTomcat(View view){
+    public void connectToTomcat(final View view){
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         final String email = username.getText().toString();
@@ -91,14 +91,30 @@ public class RedActivity extends ActionBarActivity {
         String url = "http://10.0.2.2:8080/login2/servlet/androidlogin?";
         url = url + "email=" + email;
         url = url + "&pw=" + pass;
+        Intent goToIntent = new Intent(this, GreenActivity.class);
+        goToIntent.putExtra("last_activity", "red");
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>()
                 {
                     @Override
                     public void onResponse(String response) {
 
+
                         Log.d("response", response);
                         ((TextView)findViewById(R.id.http_response)).setText(response);
+                        String login = ((TextView) findViewById(R.id.http_response)).getText().toString();
+                        Log.d("CREDS: ", login);
+                        if(login.equals("success"))
+                        {
+
+                            Log.d("LOGIN ", "loginsuccessful");
+                            goToGreen(view);
+                        }
+                        else
+                        {
+                            Log.d("NOPE: ", "Login nope");
+                        }
+
                     }
                 },
                 new Response.ErrorListener()
@@ -118,8 +134,11 @@ public class RedActivity extends ActionBarActivity {
                 return params;
             }
         };
+
         // Add the request to the RequestQueue.
         queue.add(postRequest);
+
+        //goToIntent.putExtra("message", msg);
         return ;
     }
     public void goToBlue(View view){
