@@ -34,6 +34,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RedActivity extends ActionBarActivity {
+    private EditText username = null;
+    private EditText password = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,19 +77,20 @@ public class RedActivity extends ActionBarActivity {
     }
 
     public void connectToTomcat(View view){
+        username = (EditText) findViewById(R.id.username);
+        password = (EditText) findViewById(R.id.password);
+        final String email = username.getText().toString();
+        final String pass = password.getText().toString();
 
-        //
-
+        Log.d("email: ", email);
+        Log.d("password: ", pass);
         final Map<String, String> params = new HashMap<String, String>();
-
-
         // no user is logged in, so we must connect to the server
         RequestQueue queue = Volley.newRequestQueue(this);
-
         final Context context = this;
-        String url = "http://128.195.52.58:8080/TomcatTest/servlet/TomcatTest";
-
-
+        String url = "http://10.0.2.2:8080/login2/servlet/androidlogin?";
+        url = url + "email=" + email;
+        url = url + "&pw=" + pass;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>()
                 {
@@ -96,7 +99,6 @@ public class RedActivity extends ActionBarActivity {
 
                         Log.d("response", response);
                         ((TextView)findViewById(R.id.http_response)).setText(response);
-
                     }
                 },
                 new Response.ErrorListener()
@@ -111,36 +113,27 @@ public class RedActivity extends ActionBarActivity {
             @Override
             protected Map<String, String> getParams()
             {
+//                params.put("username", email);
+//                params.put("password", pass);
                 return params;
             }
         };
-
-
         // Add the request to the RequestQueue.
         queue.add(postRequest);
-
-
         return ;
     }
-
     public void goToBlue(View view){
-        String msg = ((EditText)findViewById(R.id.red_2_blue_message)).getText().toString();
-
+        String msg = ((EditText)findViewById(R.id.username)).getText().toString();
         Intent goToIntent = new Intent(this, BlueActivity.class);
-
         goToIntent.putExtra("last_activity", "red");
         goToIntent.putExtra("message", msg);
-
         startActivity(goToIntent);
     }
     public void goToGreen(View view){
-        String msg = ((EditText)findViewById(R.id.red_2_green_message)).getText().toString();
-
+        String msg = ((EditText)findViewById(R.id.password)).getText().toString();
         Intent goToIntent = new Intent(this, GreenActivity.class);
-
         goToIntent.putExtra("last_activity", "red");
         goToIntent.putExtra("message", msg);
-
         startActivity(goToIntent);
     }
 }
