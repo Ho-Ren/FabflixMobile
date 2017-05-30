@@ -37,14 +37,15 @@ public class BlueActivity extends ActionBarActivity {
             ((TextView)findViewById(R.id.last_page_msg_container)).setText(msg);
         }*/
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_blue, getMovieList());
+        // Need this for ListView (but can't get last param yet):
+        //ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_blue, getMovieList());
 
         getSupportActionBar().setTitle("Search Results");
 
     }
 
-    public String[] getMovieList() {
-        String[] movies;
+    public void getMovieList() {
+        String[] movies; // The destination for the list of movies after getting them from the DB
         final Map<String, String> params = new HashMap<String, String>();
 
 
@@ -52,6 +53,7 @@ public class BlueActivity extends ActionBarActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
 
         final Context context = this;
+        // Servlet just has all the movies on a separate line (no html tags)
         String url = "http://10.0.2.2:8080/login2/GenerateMovies";
 
 
@@ -64,6 +66,7 @@ public class BlueActivity extends ActionBarActivity {
                         Log.d("response", response);
                     }
 
+                    // Might consider writing a function here to return a list version of the response
 
                 },
                 new Response.ErrorListener()
@@ -85,7 +88,7 @@ public class BlueActivity extends ActionBarActivity {
 
         // Add the request to the RequestQueue.
         queue.add(postRequest);
-        return movies;
+        return;
 
     }
 
