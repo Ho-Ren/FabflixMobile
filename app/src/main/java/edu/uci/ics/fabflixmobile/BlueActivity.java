@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ListView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -25,6 +26,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BlueActivity extends ActionBarActivity {
+    public int listSize;
+    public int pageLen = 10;
+    private int n;
+    private int numPages;
+    private int inc = 0;
+    private Button prev;
+    private Button next;
+    private ArrayList<String> movieList;
+    private ArrayAdapter adapter;
+    private ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,88 +43,83 @@ public class BlueActivity extends ActionBarActivity {
         setContentView(R.layout.activity_blue);
 
         Bundle bundle = getIntent().getExtras();
-        Toast.makeText(this, "Last activity was " + bundle.get("last_activity") + ".", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Last activity was " + bundle.get("last_activity") + ".", Toast.LENGTH_LONG).show();
 
         Log.d("IN ACTIVITY", "AFA");
         String msg = bundle.getString("message");
         String movies = bundle.getString("movies");
         Log.d("Movies: ", movies);
 
-        // Need this for ListView (but can't get last param yet):
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_blue, getMovieList());
-        ListView lv = (ListView)findViewById(R.id.movie_list);
-        lv.setAdapter(adapter);
+        lv = (ListView)findViewById(R.id.movie_list);
+        prev = (Button) findViewById(R.id.button_prev);
+        next = (Button) findViewById(R.id.button_next);
 
-    }
+        prev.setEnabled(false);
 
-    public String[] getMovieList() {
-        String[] movies; // The destination for the list of movies after getting them from the DB
-        final Map<String, String> params = new HashMap<String, String>();
-
-
-        // no user is logged in, so we must connect to the server
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-        final Context context = this;
-        // Servlet just has all the movies on a separate line each (no html tags)
-        String url = "http://10.0.2.2:8080/login2/GenerateMovies";
-
-
-        StringRequest postRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>()
-                {
-                    @Override
-                    public void onResponse(String response) {
-                        //String[] movies;
-                        Log.d("response", response);
-                    }
-
-                    // Might consider writing a function here to return a list version of the response
-
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // error
-                        Log.d("security.error", error.toString());
-                    }
-                }
-        ) {
+        prev.setOnClickListener(new View.OnClickListener() {
             @Override
-            protected Map<String, String> getParams()
-            {
-                return params;
+            public void onClick(View view) {
+                inc--;
+                loadPage(inc);
+                buttonEnable();
             }
-        };
+        });
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                inc++;
+                loadPage(inc);
+                buttonEnable();
+            }
+        });
 
 
-        // Add the request to the RequestQueue.
-        queue.add(postRequest);
-        return params.get("response").split("\n");
+        movieList = new ArrayList<String>();
+        if(movies != null) {
+            if(!movies.equals("")) {
+                for(String s : movies.split("\n")) {
+                    movieList.add(s);
+                }
 
+                listSize = movieList.size();
+
+            } else {
+                Toast.makeText(this, "No results found.", Toast.LENGTH_LONG).show();
+                movieList.add("No Results found.");
+                listSize = 0;
+            }
+        }
+
+        n = listSize % pageLen;
+        n = (n == 0 ? 0 : 1);
+        numPages = listSize / pageLen + n;
+
+        loadPage(0);
     }
 
-
-    public void goToRed(View view){
-        //String msg = ((EditText)findViewById(R.id.blue_2_red_message)).getText().toString();
-
-        Intent goToIntent = new Intent(this, RedActivity.class);
-
-        goToIntent.putExtra("last_activity", "blue");
-        //goToIntent.putExtra("message", msg);
-
-        startActivity(goToIntent);
-    }
-    public void goToGreen(View view){
-        //String msg = ((EditText)findViewById(R.id.blue_2_green_message)).getText().toString();
-
-        Intent goToIntent = new Intent(this, GreenActivity.class);
-
-        goToIntent.putExtra("last_activity", "blue");
-       // goToIntent.putExtra("message", msg);
-
-        startActivity(goToIntent);
+    // Check if the the prev or next button needs to be grayed out
+    private void buttonEnable() {
+        if((inc + 1) ==  numPages) {
+            next.setEnabled(false);
+        } else if (inc == 0) {
+            prev.setEnabled(false);
+        } else {
+            next.setEnabled(true);
+            prev.setEnabled(true);
+        }
     }
 
+    // Generate enough movies for one page
+    private void loadPage(int num) {
+        ArrayList<String> page = new ArrayList<String>();
+        for(int i = num * pageLen; i < (num * pageLen)+pageLen; i++) {
+            if (i < movieList.size()) {
+                page.add(movieList.get(i));
+            } else { break; }
+        }
+
+        adapter = new ArrayAdapter<String>(this, R.layout.activity_blue, page);
+        lv.setAdapter(adapter);
+    }
 }
