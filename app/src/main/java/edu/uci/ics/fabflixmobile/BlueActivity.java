@@ -1,5 +1,6 @@
 package edu.uci.ics.fabflixmobile;
 
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -22,7 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BlueActivity extends ActionBarActivity {
+public class BlueActivity extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +40,13 @@ public class BlueActivity extends ActionBarActivity {
         }*/
 
         // Need this for ListView (but can't get last param yet):
-        //ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_blue, getMovieList());
-
-        getSupportActionBar().setTitle("Search Results");
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_blue, getMovieList());
+        ListView lv = (ListView)findViewById(R.id.movie_list);
+        lv.setAdapter(adapter);
 
     }
 
-    public void getMovieList() {
+    public String[] getMovieList() {
         String[] movies; // The destination for the list of movies after getting them from the DB
         final Map<String, String> params = new HashMap<String, String>();
 
@@ -53,7 +55,7 @@ public class BlueActivity extends ActionBarActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
 
         final Context context = this;
-        // Servlet just has all the movies on a separate line (no html tags)
+        // Servlet just has all the movies on a separate line each (no html tags)
         String url = "http://10.0.2.2:8080/login2/GenerateMovies";
 
 
@@ -88,28 +90,28 @@ public class BlueActivity extends ActionBarActivity {
 
         // Add the request to the RequestQueue.
         queue.add(postRequest);
-        return;
+        return params.get("response").split("\n");
 
     }
 
 
     public void goToRed(View view){
-        String msg = ((EditText)findViewById(R.id.blue_2_red_message)).getText().toString();
+        //String msg = ((EditText)findViewById(R.id.blue_2_red_message)).getText().toString();
 
         Intent goToIntent = new Intent(this, RedActivity.class);
 
         goToIntent.putExtra("last_activity", "blue");
-        goToIntent.putExtra("message", msg);
+        //goToIntent.putExtra("message", msg);
 
         startActivity(goToIntent);
     }
     public void goToGreen(View view){
-        String msg = ((EditText)findViewById(R.id.blue_2_green_message)).getText().toString();
+        //String msg = ((EditText)findViewById(R.id.blue_2_green_message)).getText().toString();
 
         Intent goToIntent = new Intent(this, GreenActivity.class);
 
         goToIntent.putExtra("last_activity", "blue");
-        goToIntent.putExtra("message", msg);
+       // goToIntent.putExtra("message", msg);
 
         startActivity(goToIntent);
     }
