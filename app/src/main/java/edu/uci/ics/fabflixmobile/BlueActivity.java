@@ -119,7 +119,7 @@ public class BlueActivity extends ActionBarActivity {
             } else { break; }
         }
 
-        adapter = new ArrayAdapter<String>(this, R.layout.activity_blue, page);
+        adapter = new ArrayAdapter<String>(this, R.layout.listview_layout, page);
         lv.setAdapter(adapter);
     }
 }
