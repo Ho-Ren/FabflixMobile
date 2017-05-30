@@ -48,7 +48,7 @@ public class GreenActivity extends ActionBarActivity {
         final Map<String, String> params = new HashMap<String, String>();
         // no user is logged in, so we must connect to the server
         RequestQueue queue = Volley.newRequestQueue(this);
-        final Context context = this;
+        final Context   context = this;
         String url = "http://10.0.2.2:8080/AndroidServlets/servlet/androidsearch?";
         url = url + "title=" + searchstr;
 
@@ -65,7 +65,6 @@ public class GreenActivity extends ActionBarActivity {
                         ((TextView)findViewById(R.id.http_response)).setText(response);
                         if(!"".equals(searchstr))
                         {
-
                             Log.d("search ", "successful");
                             goToBlue(view);
                         }
@@ -113,12 +112,13 @@ public class GreenActivity extends ActionBarActivity {
     public void goToBlue(View view){
         String msg = ((EditText)findViewById(R.id.search)).getText().toString();
         String movies = ((TextView)findViewById(R.id.http_response)).getText().toString();
-
+        Log.d("movies", movies);
         Intent goToIntent = new Intent(this, BlueActivity.class);
         goToIntent.putExtra("last_activity", "green");
 
         goToIntent.putExtra("movies", movies);
         goToIntent.putExtra("message", msg);
+        Log.d("BEFORE ACT", "BEFORE");
         startActivity(goToIntent);
     }
 

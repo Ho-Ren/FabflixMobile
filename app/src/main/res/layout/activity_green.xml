@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="20dp"
-            android:id="@+id/search"/>
+            android:id="@+id/green2blue"/>
 
         <View android:layout_width="fill_parent"
             android:layout_height="2dip"

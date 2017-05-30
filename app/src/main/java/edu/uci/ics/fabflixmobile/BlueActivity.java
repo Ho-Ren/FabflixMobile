@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BlueActivity extends ListActivity {
+public class BlueActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +32,12 @@ public class BlueActivity extends ListActivity {
         setContentView(R.layout.activity_blue);
 
         Bundle bundle = getIntent().getExtras();
-        /*Toast.makeText(this, "Last activity was " + bundle.get("last_activity") + ".", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Last activity was " + bundle.get("last_activity") + ".", Toast.LENGTH_LONG).show();
 
+        Log.d("IN ACTIVITY", "AFA");
         String msg = bundle.getString("message");
-        if(msg != null && !"".equals(msg)){
-            ((TextView)findViewById(R.id.last_page_msg_container)).setText(msg);
-        }*/
+        String movies = bundle.getString("movies");
+        Log.d("Movies: ", movies);
 
         // Need this for ListView (but can't get last param yet):
         ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_blue, getMovieList());
