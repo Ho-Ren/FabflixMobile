@@ -47,22 +47,22 @@ public class GreenActivity extends ActionBarActivity {
         // no user is logged in, so we must connect to the server
         RequestQueue queue = Volley.newRequestQueue(this);
         final Context context = this;
-        String url = "http://10.0.2.2:8080/login2/servlet/androidlogin?";
+        String url = "http://10.0.2.2:8080/AndroidServlets/servlet/androidsearch?";
         url = url + "title=" + searchstr;
+
+
         Intent goToIntent = new Intent(this, GreenActivity.class);
         goToIntent.putExtra("last_activity", "red");
+
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>()
                 {
                     @Override
                     public void onResponse(String response) {
-
-
                         Log.d("response", response);
                         ((TextView)findViewById(R.id.http_response)).setText(response);
                         String login = ((TextView) findViewById(R.id.http_response)).getText().toString();
-                        Log.d("CREDS: ", login);
-                        if(login.equals("success"))
+                        if(!"".equals(searchstr))
                         {
 
                             Log.d("LOGIN ", "loginsuccessful");
@@ -70,7 +70,7 @@ public class GreenActivity extends ActionBarActivity {
                         }
                         else
                         {
-                            Log.d("NOPE: ", "Login nope");
+                            Log.d("NOPE: ", "Enter into search");
                         }
 
                     }

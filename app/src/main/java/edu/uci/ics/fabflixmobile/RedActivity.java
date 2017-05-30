@@ -88,7 +88,7 @@ public class RedActivity extends ActionBarActivity {
         // no user is logged in, so we must connect to the server
         RequestQueue queue = Volley.newRequestQueue(this);
         final Context context = this;
-        String url = "http://10.0.2.2:8080/login2/servlet/androidlogin?";
+        String url = "http://10.0.2.2:8080/AndroidServlets/servlet/androidlogin?";
         url = url + "email=" + email;
         url = url + "&pw=" + pass;
         Intent goToIntent = new Intent(this, GreenActivity.class);
@@ -104,7 +104,7 @@ public class RedActivity extends ActionBarActivity {
                         ((TextView)findViewById(R.id.http_response)).setText(response);
                         String login = ((TextView) findViewById(R.id.http_response)).getText().toString();
                         Log.d("CREDS: ", login);
-                        if(login.equals("success"))
+                        if(login.equals("successful"))
                         {
 
                             Log.d("LOGIN ", "loginsuccessful");
