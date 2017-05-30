@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/material_deep_teal_500"
+    android:background="@color/red"
     tools:context="edu.uci.ics.fabflixmobile.RedActivity">
 
     <ScrollView
@@ -86,6 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Send Login Request"
+                android:backgroundTint="#FFFFFF"
                 android:onClick="connectToTomcat"/>
             <TextView
                 android:text="HTTP Response:"
