@@ -24,7 +24,6 @@ public class GreenActivity extends ActionBarActivity {
         }
     }
 
-
     public void goToRed(View view){
         String msg = ((EditText)findViewById(R.id.green_2_red_message)).getText().toString();
 
