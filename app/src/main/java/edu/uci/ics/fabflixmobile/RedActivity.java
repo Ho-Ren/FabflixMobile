@@ -149,7 +149,7 @@ public class RedActivity extends ActionBarActivity {
         startActivity(goToIntent);
     }
     public void goToGreen(View view){
-        String msg = ((EditText)findViewById(R.id.password)).getText().toString();
+        String msg = ((EditText)findViewById(R.id.username)).getText().toString();
         Intent goToIntent = new Intent(this, GreenActivity.class);
         goToIntent.putExtra("last_activity", "red");
         goToIntent.putExtra("message", msg);
