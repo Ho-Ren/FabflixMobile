@@ -28,14 +28,16 @@ public class BlueActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blue);
-
+        Log.d("HELLO", "DID YOU CRASH");
         Bundle bundle = getIntent().getExtras();
-        /*Toast.makeText(this, "Last activity was " + bundle.get("last_activity") + ".", Toast.LENGTH_LONG).show();
-
+        Toast.makeText(this, "Last activity was " + bundle.get("last_activity") + ".", Toast.LENGTH_LONG).show();
+        Log.d("HELLO", "DID YOU CRASH");
         String msg = bundle.getString("message");
-        if(msg != null && !"".equals(msg)){
-            ((TextView)findViewById(R.id.last_page_msg_container)).setText(msg);
-        }*/
+        //movies should be a string of all movies seperated by new lines
+        String movies = bundle.getString("movies");
+        Log.d("HELLO", "DID YOU CRASH");
+        Log.d("MOVIES", movies);
+        Log.d("HELLO", "DID YOU CRASH");
 
         // Need this for ListView (but can't get last param yet):
         //ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_blue, getMovieList());
@@ -92,26 +94,26 @@ public class BlueActivity extends ActionBarActivity {
 
     }
 
-
-    public void goToRed(View view){
-        String msg = ((EditText)findViewById(R.id.blue_2_red_message)).getText().toString();
-
-        Intent goToIntent = new Intent(this, RedActivity.class);
-
-        goToIntent.putExtra("last_activity", "blue");
-        goToIntent.putExtra("message", msg);
-
-        startActivity(goToIntent);
-    }
-    public void goToGreen(View view){
-        String msg = ((EditText)findViewById(R.id.blue_2_green_message)).getText().toString();
-
-        Intent goToIntent = new Intent(this, GreenActivity.class);
-
-        goToIntent.putExtra("last_activity", "blue");
-        goToIntent.putExtra("message", msg);
-
-        startActivity(goToIntent);
-    }
+//
+//    public void goToRed(View view){
+//        String msg = ((EditText)findViewById(R.id.blue_2_red_message)).getText().toString();
+//
+//        Intent goToIntent = new Intent(this, RedActivity.class);
+//
+//        goToIntent.putExtra("last_activity", "blue");
+//        goToIntent.putExtra("message", msg);
+//
+//        startActivity(goToIntent);
+//    }
+//    public void goToGreen(View view){
+//        String msg = ((EditText)findViewById(R.id.blue_2_green_message)).getText().toString();
+//
+//        Intent goToIntent = new Intent(this, GreenActivity.class);
+//
+//        goToIntent.putExtra("last_activity", "blue");
+//        goToIntent.putExtra("message", msg);
+//
+//        startActivity(goToIntent);
+//    }
 
 }

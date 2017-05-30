@@ -28,13 +28,15 @@ public class GreenActivity extends ActionBarActivity {
         setContentView(R.layout.activity_green);
 
         String results = "You searched for: ";
+        String user = "Hello, ";
         Bundle bundle = getIntent().getExtras();
         Toast.makeText(this, "Last activity was " + bundle.get("last_activity") + ".", Toast.LENGTH_LONG).show();
 
         String msg = bundle.getString("message");
         if(msg != null && !"".equals(msg)){
-            ((TextView)findViewById(R.id.last_page_msg_container)).setText(msg);
+            ((TextView)findViewById(R.id.last_page_msg_container)).setText(user + msg);
             results = results + ((TextView) findViewById(R.id.last_page_msg_container)).getText().toString();
+            user = user + ((TextView) findViewById(R.id.last_page_msg_container)).getText().toString();
         }
     }
 
@@ -61,11 +63,10 @@ public class GreenActivity extends ActionBarActivity {
                     public void onResponse(String response) {
                         Log.d("response", response);
                         ((TextView)findViewById(R.id.http_response)).setText(response);
-                        String login = ((TextView) findViewById(R.id.http_response)).getText().toString();
                         if(!"".equals(searchstr))
                         {
 
-                            Log.d("LOGIN ", "loginsuccessful");
+                            Log.d("search ", "successful");
                             goToBlue(view);
                         }
                         else
@@ -111,12 +112,13 @@ public class GreenActivity extends ActionBarActivity {
     }
     public void goToBlue(View view){
         String msg = ((EditText)findViewById(R.id.search)).getText().toString();
+        String movies = ((TextView)findViewById(R.id.http_response)).getText().toString();
 
         Intent goToIntent = new Intent(this, BlueActivity.class);
-
         goToIntent.putExtra("last_activity", "green");
-        goToIntent.putExtra("message", msg);
 
+        goToIntent.putExtra("movies", movies);
+        goToIntent.putExtra("message", msg);
         startActivity(goToIntent);
     }
 
