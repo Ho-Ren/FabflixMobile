@@ -17,6 +17,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,15 +29,13 @@ public class GreenActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_green);
 
-        String results = "You searched for: ";
-        String user = "Hello, ";
+        String user = "Signed in as ";
         Bundle bundle = getIntent().getExtras();
-        Toast.makeText(this, "Last activity was " + bundle.get("last_activity") + ".", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "You have logged in successfully.", Toast.LENGTH_LONG).show();
 
         String msg = bundle.getString("message");
         if(msg != null && !"".equals(msg)){
             ((TextView)findViewById(R.id.last_page_msg_container)).setText(user + msg);
-            results = results + ((TextView) findViewById(R.id.last_page_msg_container)).getText().toString();
             user = user + ((TextView) findViewById(R.id.last_page_msg_container)).getText().toString();
         }
     }
@@ -50,8 +50,15 @@ public class GreenActivity extends ActionBarActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         final Context   context = this;
         String url = "http://10.0.2.2:8080/AndroidServlets/servlet/androidsearch?";
-        url = url + "title=" + searchstr;
-
+        String encodedUrl = null;
+        try {
+            encodedUrl = URLEncoder.encode(searchstr, "UTF-8");
+            Log.d("ENCODED:", encodedUrl);
+        } catch (UnsupportedEncodingException ignored) {
+            // Can be safely ignored because UTF-8 is always supported
+        }
+        url = url + "title=" + encodedUrl;
+        Log.d("FINAL URL:", url);
 
         Intent goToIntent = new Intent(this, GreenActivity.class);
         goToIntent.putExtra("last_activity", "red");
