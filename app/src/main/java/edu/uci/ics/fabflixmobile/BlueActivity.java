@@ -77,18 +77,22 @@ public class BlueActivity extends ActionBarActivity {
 
         movieList = new ArrayList<String>();
         if(movies != null) {
-            if(!movies.equals("")) {
-                for(String s : movies.split("\n")) {
+            if (!movies.equals("")) {
+                for (String s : movies.split("\n")) {
                     movieList.add(s);
                 }
 
                 listSize = movieList.size();
+                if (listSize == 1) {
+                    Toast.makeText(this, "No results found.", Toast.LENGTH_LONG).show();
+                    movieList.add("No Results found.");
+                    listSize = 2;
+                    prev.setEnabled(false);
+                    next.setEnabled(false);
+                }
 
-            } else {
-                Toast.makeText(this, "No results found.", Toast.LENGTH_LONG).show();
-                movieList.add("No Results found.");
-                listSize = 0;
             }
+
         }
 
         n = listSize % pageLen;
