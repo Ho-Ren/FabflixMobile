@@ -54,7 +54,10 @@ public class BlueActivity extends ActionBarActivity {
         prev = (Button) findViewById(R.id.button_prev);
         next = (Button) findViewById(R.id.button_next);
 
+        Log.d("Initial inc ", ""+inc);
+
         prev.setEnabled(false);
+        prev.setClickable(false);
 
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +84,6 @@ public class BlueActivity extends ActionBarActivity {
                 for (String s : movies.split("\n")) {
                     movieList.add(s);
                 }
-
                 listSize = movieList.size();
                 if (listSize == 1) {
                     Toast.makeText(this, "No results found.", Toast.LENGTH_LONG).show();
@@ -99,18 +101,45 @@ public class BlueActivity extends ActionBarActivity {
         n = (n == 0 ? 0 : 1);
         numPages = listSize / pageLen + n;
 
+        if(numPages <= 1)
+        {
+            next.setEnabled(false);
+            next.setClickable(false);
+        }
         loadPage(0);
     }
 
     // Check if the the prev or next button needs to be grayed out
     private void buttonEnable() {
-        if((inc + 1) ==  numPages) {
+        Log.d("buttonEnable INC: ", ""+inc);
+        Log.d("NUMPAGES ", ""+numPages);
+        if(numPages <= 1)
+        {
+            next.setClickable(false);
             next.setEnabled(false);
-        } else if (inc == 0) {
+        }
+        if(numPages > 1)
+        {
+            next.setEnabled(true);
+            next.setClickable(true);
+        }
+         if (inc == 0) {
             prev.setEnabled(false);
-        } else {
+            prev.setClickable(false);
+
+        }
+        else if((inc + 1) ==  numPages) {
+            next.setEnabled(false);
+            next.setClickable(false);
+             prev.setEnabled(true);
+             prev.setClickable(true);
+
+         }
+         else {
             next.setEnabled(true);
             prev.setEnabled(true);
+            next.setClickable(true);
+            prev.setClickable(true);
         }
     }
 

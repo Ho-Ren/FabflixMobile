@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#F00000"
+    android:background="@color/blue"
     tools:context="edu.uci.ics.fabflixmobile.GreenActivity">
 
     <LinearLayout
@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:text="The green page" />
+            android:text="NetFlex Search" />
         <View android:layout_width="fill_parent"
             android:layout_height="2dip"
             android:layout_marginBottom="20dip"
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:text="No message from last page."
+            android:text=""
             android:id="@+id/last_page_msg_container"/>
 
 
@@ -39,18 +39,6 @@
             android:layout_marginBottom="20dip"
             android:background="#FFFFFF" />
 
-        <TextView
-            android:text="Message for the blue page:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:id="@+id/label_green_2_blue_message" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="20dp"
-            android:id="@+id/green2blue"/>
 
         <View android:layout_width="fill_parent"
             android:layout_height="2dip"
@@ -88,12 +76,7 @@
             android:text="Search by Title"
             android:onClick="search"/>
         <TextView
-            android:text="HTTP Response:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp" />
-        <TextView
-            android:text="HI"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"

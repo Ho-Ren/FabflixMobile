@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/red"
+    android:background="#FFFFFF"
     tools:context="edu.uci.ics.fabflixmobile.RedActivity">
 
     <ScrollView
@@ -30,13 +30,6 @@
                 android:layout_height="2dip"
                 android:layout_marginBottom="20dip"
                 android:background="#FFFFFF" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:text="No message from last page."
-                android:id="@+id/last_page_msg_container"/>
 
 
             <View android:layout_width="fill_parent"
@@ -89,12 +82,7 @@
                 android:backgroundTint="#FFFFFF"
                 android:onClick="connectToTomcat"/>
             <TextView
-                android:text="HTTP Response:"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp" />
-            <TextView
-                android:text="HI"
+                android:text=""
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
