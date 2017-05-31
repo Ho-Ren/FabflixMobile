@@ -7,6 +7,6 @@
     <color name="green">#80FF00</color>
 
     <string name="title_activity_blue"> Search Results </string>
-    <string name="title_activity_red"> The Red Page </string>
-    <string name="title_activity_green"> The Green Page </string>
+    <string name="title_activity_red"> Login </string>
+    <string name="title_activity_green"> Search </string>
 </resources>
