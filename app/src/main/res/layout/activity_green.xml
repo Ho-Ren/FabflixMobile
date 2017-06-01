@@ -18,63 +18,58 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:text="NetFlex Search" />
-        <View android:layout_width="fill_parent"
-            android:layout_height="2dip"
-            android:layout_marginBottom="20dip"
-            android:background="#FFFFFF" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:textSize="15sp"
             android:text=""
+            android:layout_gravity="center"
             android:id="@+id/last_page_msg_container"/>
 
-
         <View android:layout_width="fill_parent"
-            android:layout_height="2dip"
+            android:layout_height="1dip"
             android:layout_marginBottom="20dip"
-            android:background="#FFFFFF" />
-
-
-        <View android:layout_width="fill_parent"
-            android:layout_height="2dip"
-            android:layout_marginBottom="10dip"
-            android:background="#FFFFFF" />
-
+            android:background="#258ed1" />
 
         <TextView
-            android:text="Search by Movie Title"
+            android:text="Search by Movie Title:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="30sp"
+            android:layout_gravity="left"
+            android:paddingTop="30dp"
             android:id="@+id/label_green_2_red_message" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="20dp"
+            android:textColorLink="#258ed1"
             android:id="@+id/search"/>
 
-        <Button
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="Back to login"
-            android:onClick="goToRed"/>
-        <View android:layout_width="fill_parent"
-            android:layout_height="2dip"
-            android:layout_marginBottom="10dip"
-            android:background="#FFFFFF" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Search by Title"
-            android:onClick="search"/>
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="#107cc9"
+                android:text="Search"
+                android:onClick="search" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="#ffffff"
+                android:text="Back to login"
+                android:onClick="goToRed"/>
+            </LinearLayout>
+
         <TextView
             android:text=""
             android:layout_width="wrap_content"

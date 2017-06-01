@@ -23,8 +23,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="25sp"
-                android:text="NetFlex" />
+                android:textSize="35sp"
+                android:layout_gravity="center"
+                android:paddingTop="15dp"
+                android:text="Log In" />
 
             <View android:layout_width="fill_parent"
                 android:layout_height="2dip"
@@ -78,14 +80,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Send Login Request"
-                android:backgroundTint="#FFFFFF"
+                android:text="Login"
+                android:backgroundTint="#c3d4e0"
                 android:onClick="connectToTomcat"/>
             <TextView
                 android:text=""
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
                 android:id="@+id/http_response"/>
 
 
